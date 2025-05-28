@@ -2,6 +2,7 @@ CC:=clang
 CFLAGS:=-Wall -MMD -MP -O3
 BINNAME:=main
 
+INC:=$(wildcard include/*.a)
 SRC:=$(wildcard *.c)
 OBJ:=$(SRC:.c=.o)
 DEP:=$(SRC:.c=.d)
@@ -14,7 +15,7 @@ DEP:=$(SRC:.c=.d)
 all:$(BINNAME)
 
 $(BINNAME):$(OBJ)
-	$(CC) $(CFLAGS) -o $@ $(OBJ) -lm
+	$(CC) $(CFLAGS) -o $@ $(OBJ) $(INC) -lm
 
 %.o:%.c Makefile
 	$(CC) $(CFLAGS) -c -o $@ $<
